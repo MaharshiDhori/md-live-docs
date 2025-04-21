@@ -3,11 +3,20 @@ import Header from '@/components/Header'
 import { Editor } from '@/components/editor/Editor'
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { ClientSideSuspense, RoomProvider } from '@liveblocks/react'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import Loader from './Loader';
 import ActiveCollaborators from './ActiveCollaborators';
 
 const CollaborativeRoom = ( {roomId, roomMetadata} : CollaborativeRoomProps) => {
+
+  const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLDivElement>(null);
+
+
+
 
   return (
     <RoomProvider id={roomId}>
