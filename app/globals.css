@@ -69,6 +69,10 @@
   @apply min-h-[92px] min-w-full flex-nowrap  bg-[var(--color-dark-100)] flex w-full items-center justify-between gap-2 px-4;
 }
 
+.document-title-input {
+  @apply min-w-[78px] border-none bg-transparent px-0 text-left text-base font-semibold leading-[24px] focus-visible:ring-0 focus-visible:ring-offset-0 disabled:text-black sm:text-xl md:text-center;
+}
+
 @layer utilities {
   /* .text-28-semibold {
     @apply text-[28px] font-semibold;

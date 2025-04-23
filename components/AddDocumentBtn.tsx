@@ -20,7 +20,7 @@ const AddDocumentBtn = ({userId , email}: AddDocumentBtnProps) => {
 
     return (
     <Button type='submit' onClick={addDocumentHandler} 
-    className='bg-gradient-to-t from-blue-500 to-blue-400 flex gap-1 shadow-md'>
+    className='bg-gradient-to-t from-blue-500 to-blue-400 flex gap-1 shadow-md cursor-pointer'>
         <Image
         src="/assets/icons/add.svg" width={24} height={24} alt="add"
         />
