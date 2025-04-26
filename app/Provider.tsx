@@ -4,6 +4,7 @@ import { LiveblocksProvider, ClientSideSuspense } from "@liveblocks/react/suspen
 import Loader from '@/components/Loader';
 import { getClerkUsers, getDocumentUsers } from '@/lib/actions/user.actions';
 import { useUser } from '@clerk/nextjs';
+import { getUserColor } from '@/lib/utils';
 
 const Provider = ({children}: {children: ReactNode}) => {
   const {user: clerkUser} =  useUser()
@@ -18,8 +19,15 @@ const Provider = ({children}: {children: ReactNode}) => {
     authEndpoint="/api/liveblocks-auth"
     resolveUsers={async ({ userIds }) => {
       const users = await getClerkUsers({ userIds});
-      return users;
+      return users.map(user => user ? {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        avatar: user.avatar,
+        color: getUserColor(user.id),
+      } : undefined);
     }}
+    
     resolveMentionSuggestions={async ({text, roomId}) => {
       const roomUsers = await getDocumentUsers({
         roomId, 
