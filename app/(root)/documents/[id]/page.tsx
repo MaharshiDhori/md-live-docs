@@ -31,20 +31,20 @@ const Document = async ({ params }: PageProps) => {
 
   const usersData = users.map((user: any) => ({
     ...user,
-    // @ts-ignore
+    // @ts-expect-error
     userType: room.usersAccesses[user.email]?.includes('room:write')
       ? 'editor'
       : 'viewer'
   }));
 
-  // @ts-ignore
+  // @ts-expect-error
   const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer';
 
   return (
     <main className="flex w-full flex-col items-center">
       <CollaborativeRoom 
         roomId={id}
-        // @ts-ignore
+        // @ts-expect-error
         roomMetadata={room.metadata}
         users={usersData}
         currentUserType={currentUserType}

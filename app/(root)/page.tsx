@@ -36,7 +36,7 @@ const Home = async () => {
 
       </div>
       </Header>
-      {/* @ts-ignore */}
+      {/* @ts-expect-error */}
       {roomDocuments.data.length > 0 ? (
         <div className='document-list-container'>
           <div className='document-list-title'>
@@ -48,7 +48,7 @@ const Home = async () => {
             </div>
             
           <ul className="document-ul">
-          {/* @ts-ignore */}
+          {/* @ts-expect-error */}
             {roomDocuments.data.map(({id, metadata, createdAt}: docList) => (
               <li key={id} className='document-list-item'>
                 <Link href={`/documents/${id}`} className='flex flex-1 item-center gsp-4'>
