@@ -4,13 +4,14 @@ import { getClerkUsers } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-
-declare type SearchParamProps = {
-  params: { [key: string]: string };
+// Use the correct props type for Next.js 15 pages
+interface PageProps {
+  params: { id: string };
   searchParams: { [key: string]: string | string[] | undefined };
-};
+}
 
-const Document = async ({ params: { id } }: SearchParamProps) => {
+const Document = async ({ params }: PageProps) => {
+  const { id } = params;
   const clerkUser = await currentUser();
   if(!clerkUser) redirect('/sign-in');
 
