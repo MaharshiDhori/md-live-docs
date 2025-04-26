@@ -41,7 +41,7 @@ const ShareModal = ({roomId, collaborators, creatorId, currentUserType}: ShareDo
   return (
 
     <Dialog open={open} onOpenChange={setOpen}>
-    <DialogTrigger>
+    {/* <DialogTrigger> */}
       <Button className='gradient-blue cursor-pointer flex h-9 gap-1 px-4' disabled={currentUserType !== 'editor'}>
         <Image
           src="/assets/icons/share.svg"
@@ -55,7 +55,7 @@ const ShareModal = ({roomId, collaborators, creatorId, currentUserType}: ShareDo
         </p>
 
       </Button>
-    </DialogTrigger>
+    {/* </DialogTrigger> */}
     <DialogContent className='shad-dialog'>
       <DialogHeader>
         <DialogTitle>Manage who can view this project</DialogTitle>

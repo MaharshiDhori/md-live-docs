@@ -73,11 +73,7 @@ export default function ToolbarPlugin() {
       }),
       editor.registerCommand(
         SELECTION_CHANGE_COMMAND,
-        // (_payload, _newEditor) => {
-        //   $updateToolbar();
-        //   return false;
-        // },
-        (_, __) => {
+        (_payload, _newEditor) => {
           $updateToolbar();
           return false;
         },
