@@ -3,7 +3,6 @@ import {nanoid} from 'nanoid'
 import { liveblocks } from '../liveblocks';
 import { revalidatePath } from 'next/cache';
 import { parseStringify } from '../utils';
-import { log } from 'console';
 
 export const createDocument = async({userId, email}: CreateDocumentParams) => {
     const roomId = nanoid()
@@ -47,5 +46,31 @@ export const getDocument = async ({roomId, userId}: {roomId: string, userId: str
     
     } catch (error) {
         console.log(`Error happened while getting a room: ${error}`);
+    }
+}
+
+export const getDocuments = async (email: string) => {
+    try {const rooms = await liveblocks.getRooms({userId: email});
+
+    return parseStringify(rooms)
+    
+    } catch (error) {
+        console.log(`Error happened while getting a rooms: ${error}`);
+    }
+}
+
+export const updateDocument = async (roomId: string, title: string) => {
+    try {
+        const updateRoom = await liveblocks.updateRoom(roomId, {
+            metadata: {
+                title
+            }
+        })
+        
+    revalidatePath(`/documents/${roomId}`);
+    return parseStringify(updateRoom);
+
+    } catch (error) {
+        console.log(`Error while updating a room: ${error}`)
     }
 }
