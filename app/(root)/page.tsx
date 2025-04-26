@@ -13,7 +13,7 @@ import Notification from '@/components/Notification'
 
 type docList = {
   id: string;
-  metadata: Record<string, any>;
+  metadata: Record<string, string>;
   createdAt: string;
 };
 
@@ -23,6 +23,8 @@ const Home = async () => {
   if(!clearkUser) redirect('sign-in');
 
   const roomDocuments = await getDocuments(clearkUser.emailAddresses[0].emailAddress)
+  console.log("roomDocuments: ",roomDocuments.metadata);
+  
 
   return (
     <main className='relative flex min-h-screen w-full flex-col items-center gap-5 sm:gap-10'>
