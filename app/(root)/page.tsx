@@ -9,6 +9,8 @@ import { redirect } from 'next/navigation'
 import { getDocuments } from '@/lib/actions/room.actions'
 import Link from 'next/link'
 import { dateConverter } from '@/lib/utils'
+import { DeleteModal } from '@/components/DeleteModal'
+import Notification from '@/components/Notification'
 
 const Home = async () => {
   const clearkUser = await currentUser()
@@ -20,7 +22,7 @@ const Home = async () => {
     <main className='relative flex min-h-screen w-full flex-col items-center gap-5 sm:gap-10'>
       <Header className="sticky left-0 top-0">
       <div className="flex item-centet gap-2 lg:gap-4">
-        Notification
+        <Notification />
         <SignedIn>
           <UserButton />
         </SignedIn>
@@ -55,6 +57,9 @@ const Home = async () => {
                      </div>
                   </div>
                 </Link>
+                <DeleteModal
+                  roomId={id}
+                />
               </li>
             ))}
           </ul>
