@@ -1,16 +1,14 @@
 'use client';
 import Header from '@/components/Header'
 import { Editor } from '@/components/editor/Editor'
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { ClientSideSuspense, RoomProvider } from '@liveblocks/react'
 import React, { useEffect, useRef, useState } from 'react'
 import Loader from './Loader';
 import ActiveCollaborators from './ActiveCollaborators';
 import { Input } from './ui/input';
-import { currentUser } from '@clerk/nextjs/server';
 import Image from 'next/image';
 import { updateDocument } from '@/lib/actions/room.actions';
-import { title } from 'process';
 import ShareModal from './ShareModal';
 
 const CollaborativeRoom = ( {roomId, roomMetadata, users, currentUserType} : CollaborativeRoomProps) => {
@@ -133,7 +131,3 @@ const CollaborativeRoom = ( {roomId, roomMetadata, users, currentUserType} : Col
 }
 
 export default CollaborativeRoom
-
-function async(arg0: (e: React.KeyboardEvent<HTMLInputElement>) => void) {
-  throw new Error('Function not implemented.');
-}

@@ -7,6 +7,11 @@ import { useUser } from '@clerk/nextjs';
 
 const Provider = ({children}: {children: ReactNode}) => {
   const {user: clerkUser} =  useUser()
+  if (!clerkUser || !clerkUser.emailAddresses?.length) {
+    return <Loader />; // or handle missing email properly
+  }
+
+  const currentUserEmail = clerkUser.emailAddresses[0].emailAddress;
 
   return (
     <LiveblocksProvider 
@@ -18,7 +23,7 @@ const Provider = ({children}: {children: ReactNode}) => {
     resolveMentionSuggestions={async ({text, roomId}) => {
       const roomUsers = await getDocumentUsers({
         roomId, 
-        currentUser: clerkUser?.emailAddresses[0].emailAddress!,
+        currentUser: currentUserEmail,
         text
       })
       return roomUsers;

@@ -1,5 +1,4 @@
 import Header from '@/components/Header'
-import { Button } from '@/components/ui/button'
 import { SignedIn, UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import React from 'react'
@@ -11,6 +10,13 @@ import Link from 'next/link'
 import { dateConverter } from '@/lib/utils'
 import { DeleteModal } from '@/components/DeleteModal'
 import Notification from '@/components/Notification'
+
+type docList = {
+  id: string;
+  metadata: Record<string, any>;
+  createdAt: string;
+};
+
 
 const Home = async () => {
   const clearkUser = await currentUser()
@@ -41,7 +47,7 @@ const Home = async () => {
             </div>
 
           <ul className="document-ul">
-            {roomDocuments.data.map(({id, metadata, createdAt}: any) => (
+            {roomDocuments.data.map(({id, metadata, createdAt}: docList) => (
               <li key={id} className='document-list-item'>
                 <Link href={`/documents/${id}`} className='flex flex-1 item-center gsp-4'>
                   <div className='hidden rounded-md bg-dark-500 p-2 sm:block'>

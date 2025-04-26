@@ -1,18 +1,9 @@
 import CollaborativeRoom from '@/components/CollaborativeRoom'
-import Header from '@/components/Header'
-import { Editor } from '@/components/editor/Editor'
 import { getDocument } from '@/lib/actions/room.actions'
 import { getClerkUsers } from '@/lib/actions/user.actions'
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
 import React from 'react'
-
-type SearchParamProp = {
-  params: {
-    id: string;
-  };
-};
 
 const Document = async (props: SearchParamProps) => {
   // Await the params first
@@ -29,8 +20,6 @@ const Document = async (props: SearchParamProps) => {
   
 
   if(!room) redirect('/')
-
-  //TODO: Assess the permissions of the user to access the document
 
   const userIds = Object.keys(room.usersAccesses)
 
