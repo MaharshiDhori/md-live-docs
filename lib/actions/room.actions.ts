@@ -2,7 +2,7 @@
 import {nanoid} from 'nanoid'
 import { liveblocks } from '../liveblocks';
 import { revalidatePath } from 'next/cache';
-import { getAccessType, parseStringify } from '../utils';
+import { getAccessType } from '../utils';
 import { redirect } from 'next/navigation';
 
 export const createDocument = async({userId, email}: CreateDocumentParams) => {
@@ -26,7 +26,7 @@ export const createDocument = async({userId, email}: CreateDocumentParams) => {
           });
 
         revalidatePath('/');
-        return parseStringify(room);
+        return room;
 
 
     } catch (error) {
@@ -43,7 +43,7 @@ export const getDocument = async ({roomId, userId}: {roomId: string, userId: str
         throw new Error('You do not have access to this document')
     }
 
-    return parseStringify(room)
+    return room
     
     } catch (error) {
         console.log(`Error happened while getting a room: ${error}`);
@@ -53,7 +53,7 @@ export const getDocument = async ({roomId, userId}: {roomId: string, userId: str
 export const getDocuments = async (email: string) => {
     try {const rooms = await liveblocks.getRooms({userId: email});
 
-    return parseStringify(rooms)
+    return rooms
     
     } catch (error) {
         console.log(`Error happened while getting a rooms: ${error}`);
@@ -69,7 +69,7 @@ export const updateDocument = async (roomId: string, title: string) => {
         })
         
     revalidatePath(`/documents/${roomId}`);
-    return parseStringify(updateRoom);
+    return updateRoom;
 
     } catch (error) {
         console.log(`Error while updating a room: ${error}`)
@@ -105,7 +105,7 @@ export const updateDocumentAccess = async ({ roomId, email, userType, updatedBy 
       }
   
       revalidatePath(`/documents/${roomId}`);
-      return parseStringify(room);
+      return room;
     } catch (error) {
       console.log(`Error happened while updating a room access: ${error}`);
     }
@@ -126,7 +126,7 @@ try {
     })
 
     revalidatePath(`/documents/${roomId}`);
-    return parseStringify(updatedRoom);
+    return updatedRoom;
 } catch (error) {
     console.log(`Error happened while removing a collaborator: ${error}`);
 }
