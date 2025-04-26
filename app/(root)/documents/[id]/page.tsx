@@ -1,8 +1,14 @@
-import CollaborativeRoom from "@/components/CollaborativeRoom"
+import CollaborativeRoom from "@/components/CollaborativeRoom";
 import { getDocument } from "@/lib/actions/room.actions";
 import { getClerkUsers } from "@/lib/actions/user.actions";
-import { currentUser } from "@clerk/nextjs/server"
+import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+
+
+declare type SearchParamProps = {
+  params: { [key: string]: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 const Document = async ({ params: { id } }: SearchParamProps) => {
   const clerkUser = await currentUser();
@@ -13,7 +19,7 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
     userId: clerkUser.emailAddresses[0].emailAddress,
   });
 
-  if(!room) redirect('/');
+  if (!room) redirect("/");
 
   const userIds = Object.keys(room.usersAccesses);
   const users = await getClerkUsers({ userIds });
