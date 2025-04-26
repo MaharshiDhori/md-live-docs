@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 
 export async function POST(request: Request) {
+  console.log(request);
   // Get the current user from your database
   const clerkUser = await currentUser();
   
