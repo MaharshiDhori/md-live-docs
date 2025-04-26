@@ -23,7 +23,6 @@ const Home = async () => {
   if(!clearkUser) redirect('sign-in');
 
   const roomDocuments = await getDocuments(clearkUser.emailAddresses[0].emailAddress)
-  console.log("roomDocuments: ",roomDocuments.metadata);
   
 
   return (
