@@ -33,7 +33,6 @@ const ShareModal = ({roomId, collaborators, creatorId, currentUserType}: ShareDo
           roomId, 
           email, 
           userType: userType as UserType, 
-          // @ts-expect-error
           updatedBy: user
       });
       setLoading(false)
@@ -95,7 +94,7 @@ const ShareModal = ({roomId, collaborators, creatorId, currentUserType}: ShareDo
                 creatorId={creatorId}
                 email={collaborator.email}
                 collaborator={collaborator}
-                // @ts-expect-error
+                // 
                 user={user.info}
               />
           ))}
