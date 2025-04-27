@@ -18,7 +18,8 @@ import { updateDocumentAccess } from '@/lib/actions/room.actions'
 
 
 const ShareModal = ({roomId, collaborators, creatorId, currentUserType}: ShareDocumentDialogProps) => {
-  const user = useUser()
+  const { user } = useUser();
+
   
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -32,7 +33,7 @@ const ShareModal = ({roomId, collaborators, creatorId, currentUserType}: ShareDo
           roomId, 
           email, 
           userType: userType as UserType, 
-          updatedBy: user.info
+          updatedBy: user
       });
       setLoading(false)
   }
@@ -93,6 +94,7 @@ const ShareModal = ({roomId, collaborators, creatorId, currentUserType}: ShareDo
                 creatorId={creatorId}
                 email={collaborator.email}
                 collaborator={collaborator}
+                // 
                 user={user.info}
               />
           ))}

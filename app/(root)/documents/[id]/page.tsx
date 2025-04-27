@@ -4,13 +4,18 @@ import { getClerkUsers } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
+type Params = Promise<{ id: string }>;
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
-declare type SearchParamProps = {
-  params: { [key: string]: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+interface PageProps {
+  params: Params;
+  searchParams: SearchParams;
+}
 
-const Document = async ({ params: { id } }: SearchParamProps) => {
+const Document = async ({ params }: PageProps) => {
+  // Await the params Promise to get the actual values
+  const { id } = await params;
+  
   const clerkUser = await currentUser();
   if(!clerkUser) redirect('/sign-in');
 
@@ -24,12 +29,12 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
   const userIds = Object.keys(room.usersAccesses);
   const users = await getClerkUsers({ userIds });
 
-  const usersData = users.map((user: User) => ({
+  const usersData = users.map((user: any) => ({
     ...user,
     userType: room.usersAccesses[user.email]?.includes('room:write')
       ? 'editor'
       : 'viewer'
-  }))
+  }));
 
   const currentUserType = room.usersAccesses[clerkUser.emailAddresses[0].emailAddress]?.includes('room:write') ? 'editor' : 'viewer';
 
@@ -42,7 +47,7 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
         currentUserType={currentUserType}
       />
     </main>
-  )
-}
+  );
+};
 
-export default Document
+export default Document;

@@ -36,7 +36,7 @@ const Home = async () => {
 
       </div>
       </Header>
-
+      {/*  */}
       {roomDocuments.data.length > 0 ? (
         <div className='document-list-container'>
           <div className='document-list-title'>
@@ -46,8 +46,9 @@ const Home = async () => {
             email={clearkUser.emailAddresses[0].emailAddress}
             />
             </div>
-
+            
           <ul className="document-ul">
+          {/*  */}
             {roomDocuments.data.map(({id, metadata, createdAt}: docList) => (
               <li key={id} className='document-list-item'>
                 <Link href={`/documents/${id}`} className='flex flex-1 item-center gsp-4'>
