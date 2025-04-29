@@ -11,7 +11,8 @@
   "dependencies": {
     "@clerk/nextjs": "^6.16.0",
     "@clerk/themes": "^2.2.34",
-    "@lexical/react": "^0.30.0",
+    "@lexical/react": "0.24.0",
+    "lexical": "0.24.0",
     "@liveblocks/client": "^2.23.2",
     "@liveblocks/node": "^2.23.2",
     "@liveblocks/react": "^2.23.2",
@@ -26,7 +27,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "jsm-editor": "^0.0.12",
-    "lexical": "^0.30.0",
     "lucide-react": "^0.501.0",
     "nanoid": "^5.1.5",
     "next": "15.3.1",
