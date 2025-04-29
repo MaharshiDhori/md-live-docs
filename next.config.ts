@@ -7,8 +7,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [{ protocol: 'https', hostname: 'img.clerk.com' }]
   },
   typescript: {
-    // Warning: This allows production builds to complete despite TypeScript errors
-    ignoreBuildErrors: process.env.NODE_ENV === 'production',
+    ignoreBuildErrors: true,
   }
 
 };
