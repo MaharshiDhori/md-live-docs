@@ -18,11 +18,16 @@ const Provider = ({ children }: { children: ReactNode}) => {
         return users;
       }}
       resolveMentionSuggestions={async ({ text, roomId }) => {
+        const email = clerkUser?.emailAddresses[0]?.emailAddress;
+        if (!email) {
+          // Handle the case when the email is not available
+          throw new Error("Email not found");
+        }
         const roomUsers = await getDocumentUsers({
           roomId,
-          currentUser: clerkUser?.emailAddresses[0].emailAddress!,
+          currentUser: email,
           text,
-        })
+        });
 
         return roomUsers;
       }}
